@@ -13,10 +13,12 @@ from config.database import settings
 from routes.query_routes import router as query_router
 from routes.migration_routes import router as migration_router
 from routes.s3_routes import router as s3_router
+from routes.auth_routes import router as auth_router
 from services.clickhouse_service import clickhouse_service
 from services.postgres_service import postgres_service
 from services.duckdb_service import duckdb_service
-
+from dotenv import load_dotenv
+load_dotenv(".env")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -53,6 +55,7 @@ app.add_middleware(
 )
 
 # Include routers
+app.include_router(auth_router)
 app.include_router(query_router)
 app.include_router(migration_router)
 app.include_router(s3_router)
