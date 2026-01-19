@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     minio_access_key: str = "minioadmin"
     minio_secret_key: str = "minioadmin"
     minio_secure: bool = False
+    minio_bucket: str = "default"
 
     class Config:
         env_file = ".env"
